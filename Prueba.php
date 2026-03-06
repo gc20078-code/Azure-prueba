@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba PHP</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input[type=text] { width: 100%; padding: 8px; margin: 10px 0; }
+        input[type=submit] { background: #4CAF50; color: white; padding: 10px; border: none; cursor: pointer; }
+        .resultado { margin-top: 20px; background: #f0f0f0; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Prueba de PHP</h1>
+
+        <?php
+        // Mostrar información básica
+        echo "<p><strong>Versión de PHP:</strong> " . phpversion() . "</p>";
+        echo "<p><strong>Fecha y hora actual:</strong> " . date('Y-m-d H:i:s') . "</p>";
+        ?>
+
+        <form method="post">
+            <label for="nombre">Escribe tu nombre:</label>
+            <input type="text" name="nombre" id="nombre" placeholder="Ej. Juan" required>
+            <input type="submit" value="Saludar">
+        </form>
+
+        <?php
+        // Procesar el formulario cuando se envíe
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['nombre'])) {
+            $nombre = htmlspecialchars($_POST['nombre']); // Evita inyección de código
+            echo '<div class="resultado">';
+            echo "<p>¡Hola, <strong>$nombre</strong>! Bienvenido a tu prueba PHP.</p>";
+            echo '</div>';
+        }
+        ?>
+    </div>
+</body>
+</html>
